@@ -262,6 +262,8 @@ function displayMessage(msg) {
 // 1. i need to select check button -> document.q.('.check')
 // 2. i need to play the game when it is clicked
 
+let score = 20;
+let highscore = 0;
 document.querySelector('.check').addEventListener('click', function() {
     const guess = document.querySelector('.guess').value;
 
