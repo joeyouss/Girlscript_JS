@@ -266,13 +266,17 @@ let score = 20;
 let highscore = 0;
 document.querySelector('.check').addEventListener('click', function() {
     const guess = document.querySelector('.guess').value;
-
     if (!guess) {
         displayMessage('Invalid input');
     } else if (guess == secretNumber) {
         displayMessage('You won');
         document.querySelector('.number').textContent = secretNumber;
         document.querySelector('body').style.backgroundColor = '#60b347';
+
+        if (score > highscore) {
+            highscore = score;
+            document.querySelector('.highscore').textContent = score;
+        }
     } else if (guess !== secretNumber) {
         // ?
         // condition ? _a___ : __b__
@@ -288,6 +292,24 @@ document.querySelector('.check').addEventListener('click', function() {
             document.querySelector('.score').textContent = 0;
         }
     }
+});
+
+// what is changing:
+// color should be returned back to normal - black DONE
+// my question mark should come back again DONE
+// my score should be reset to 20 DONE
+// my html input section should be empty again DONE
+// my message should change back to start playing DONE
+// i need a new random number
+
+document.querySelector('.again').addEventListener('click', () => {
+    score = 20;
+    document.querySelector('body').style.backgroundColor = '#000';
+    document.querySelector('.number').textContent = '?';
+    document.querySelector('.score').textContent = score;
+    document.querySelector('.guess').value = '';
+    displayMessage('Start playing');
+    secretNumber = Math.trunc(Math.random() * 20) + 1;
 });
 
 // functions - DRY principle
