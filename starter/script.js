@@ -249,7 +249,7 @@
 
 // LOGIC 1 - GET THE NUMBERS
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
-const guess = document.querySelector('.guess').value;
+
 // camelCase
 // lOGIC 2 - MATCH THE NUMBERS
 // logic for function
@@ -257,15 +257,37 @@ const guess = document.querySelector('.guess').value;
 function displayMessage(msg) {
     document.querySelector('.message').textContent = msg;
 }
-if (!guess) {
-    displayMessage('Invalid input');
-} else if (guess == secretNumber) {
-    displayMessage('You won');
-} else if (guess < secretNumber) {
-    displayMessage('Too low');
-} else {
-    displayMessage('Too high');
-}
+
+// logic -
+// 1. i need to select check button -> document.q.('.check')
+// 2. i need to play the game when it is clicked
+
+document.querySelector('.check').addEventListener('click', function() {
+    const guess = document.querySelector('.guess').value;
+
+    if (!guess) {
+        displayMessage('Invalid input');
+    } else if (guess == secretNumber) {
+        displayMessage('You won');
+        document.querySelector('.number').textContent = secretNumber;
+        document.querySelector('body').style.backgroundColor = '#60b347';
+    } else if (guess !== secretNumber) {
+        // ?
+        // condition ? _a___ : __b__
+        guess > secretNumber ?
+            displayMessage('Too high') :
+            displayMessage('Too low');
+
+        if (score > 1) {
+            score--;
+            document.querySelector('.score').textContent = score;
+        } else {
+            displayMessage('You lost the game');
+            document.querySelector('.score').textContent = 0;
+        }
+    }
+});
+
 // functions - DRY principle
 // LOGIC 3 - CHECK FOR SCORE AND HIGHSCORE
 // i want my score to decrease if my number is wrong
